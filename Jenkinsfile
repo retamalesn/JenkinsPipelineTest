@@ -3,7 +3,10 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'mvn --rversion'
+                retry(3) {
+                    sh 'mvn --rversion'
+                }
+                
             }
         }
     }
