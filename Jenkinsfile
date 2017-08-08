@@ -1,10 +1,15 @@
 pipeline {
     agent { docker 'maven:3.3.3' }
+    environment {
+        DISABLE_AUTH = 'true'
+        DB_ENGINE    = 'sqlite'
+    }
     stages {
         stage('build') {
             steps {
                 retry(3) {
-                    sh 'mvn --rversion'
+                    sh 'mvn --version'
+                    echo DB_ENGINE
                 }
                 
             }
